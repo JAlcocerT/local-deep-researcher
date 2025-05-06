@@ -1,6 +1,21 @@
+[Blog Post **here** →](https://jalcocert.github.io/JAlcocerT/selfhosted-apps-may-2025/#local-deep-researcher) 
+
+
+<div align="center">
+  <img src="local-research-sample.png" alt="Ollama Local Research" style="width:100%;"/>
+  <p><em>Ollama Local Research Sample on Titanium Properties</em></p>
+</div>
+
+
+---
+
 # Local Deep Researcher
 
-Local Deep Researcher is a fully local web research assistant that uses any LLM hosted by [Ollama](https://ollama.com/search) or [LMStudio](https://lmstudio.ai/). Give it a topic and it will generate a web search query, gather web search results, summarize the results of web search, reflect on the summary to examine knowledge gaps, generate a new search query to address the gaps, and repeat for a user-defined number of cycles. It will provide the user a final markdown summary with all sources used to generate the summary.
+Local Deep Researcher is a fully local web research assistant that uses any LLM hosted by [Ollama](https://ollama.com/search) or [LMStudio](https://lmstudio.ai/).
+
+Give it a topic and it will generate a web search query, gather web search results, summarize the results of web search, reflect on the summary to examine knowledge gaps, generate a new search query to address the gaps, and repeat for a user-defined number of cycles.
+
+It will provide the user a final markdown summary with all sources used to generate the summary.
 
 ![ollama-deep-research](https://github.com/user-attachments/assets/1c6b28f8-6b64-42ba-a491-1ab2875d50ea)
 
