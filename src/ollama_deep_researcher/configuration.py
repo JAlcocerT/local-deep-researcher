@@ -24,10 +24,10 @@ class Configuration(BaseModel):
         title="LLM Model Name",
         description="Name of the LLM model to use"
     )
-    llm_provider: Literal["ollama", "lmstudio"] = Field(
+    llm_provider: Literal["ollama", "lmstudio", "openai"] = Field(
         default="ollama",
         title="LLM Provider",
-        description="Provider for the LLM (Ollama or LMStudio)"
+        description="Provider for the LLM (Ollama, LMStudio, or OpenAI)"
     )
     search_api: Literal["perplexity", "tavily", "duckduckgo", "searxng"] = Field(
         default="duckduckgo",
@@ -53,6 +53,16 @@ class Configuration(BaseModel):
         default=True,
         title="Strip Thinking Tokens",
         description="Whether to strip <think> tokens from model responses"
+    )
+    openai_model: str = Field(
+        default="gpt-3.5-turbo",
+        title="OpenAI Model Name",
+        description="Name of the OpenAI model to use when LLM Provider is 'openai'"
+    )
+    openai_api_key: Optional[str] = Field(
+        default=None,
+        title="OpenAI API Key",
+        description="API key for OpenAI; will fallback to OPENAI_API_KEY env var if not provided"
     )
 
     @classmethod

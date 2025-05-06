@@ -5,6 +5,7 @@ from typing_extensions import Literal
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 from langgraph.graph import START, END, StateGraph
 
 from ollama_deep_researcher.configuration import Configuration, SearchAPI
@@ -41,18 +42,26 @@ def generate_query(state: SummaryState, config: RunnableConfig):
     # Choose the appropriate LLM based on the provider
     if configurable.llm_provider == "lmstudio":
         llm_json_mode = ChatLMStudio(
-            base_url=configurable.lmstudio_base_url, 
-            model=configurable.local_llm, 
-            temperature=0, 
-            format="json"
+            base_url=configurable.lmstudio_base_url,
+            model=configurable.local_llm,
+            temperature=0,
+            format="json",
         )
-    else: # Default to Ollama
+    elif configurable.llm_provider == "ollama":
         llm_json_mode = ChatOllama(
-            base_url=configurable.ollama_base_url, 
-            model=configurable.local_llm, 
-            temperature=0, 
-            format="json"
+            base_url=configurable.ollama_base_url,
+            model=configurable.local_llm,
+            temperature=0,
+            format="json",
         )
+    elif configurable.llm_provider == "openai":
+        llm_json_mode = ChatOpenAI(
+            model=configurable.openai_model,
+            temperature=0,
+            api_key=configurable.openai_api_key,
+        )
+    else:
+        raise ValueError(f"Unsupported LLM provider: {configurable.llm_provider}")
     
     result = llm_json_mode.invoke(
         [SystemMessage(content=formatted_prompt),
@@ -151,16 +160,24 @@ def summarize_sources(state: SummaryState, config: RunnableConfig):
     # Choose the appropriate LLM based on the provider
     if configurable.llm_provider == "lmstudio":
         llm = ChatLMStudio(
-            base_url=configurable.lmstudio_base_url, 
-            model=configurable.local_llm, 
-            temperature=0
+            base_url=configurable.lmstudio_base_url,
+            model=configurable.local_llm,
+            temperature=0,
         )
-    else:  # Default to Ollama
+    elif configurable.llm_provider == "ollama":
         llm = ChatOllama(
-            base_url=configurable.ollama_base_url, 
-            model=configurable.local_llm, 
-            temperature=0
+            base_url=configurable.ollama_base_url,
+            model=configurable.local_llm,
+            temperature=0,
         )
+    elif configurable.llm_provider == "openai":
+        llm = ChatOpenAI(
+            model=configurable.openai_model,
+            temperature=0,
+            api_key=configurable.openai_api_key,
+        )
+    else:
+        raise ValueError(f"Unsupported LLM provider: {configurable.llm_provider}")
     
     result = llm.invoke(
         [SystemMessage(content=summarizer_instructions),
@@ -195,18 +212,26 @@ def reflect_on_summary(state: SummaryState, config: RunnableConfig):
     # Choose the appropriate LLM based on the provider
     if configurable.llm_provider == "lmstudio":
         llm_json_mode = ChatLMStudio(
-            base_url=configurable.lmstudio_base_url, 
-            model=configurable.local_llm, 
-            temperature=0, 
-            format="json"
+            base_url=configurable.lmstudio_base_url,
+            model=configurable.local_llm,
+            temperature=0,
+            format="json",
         )
-    else: # Default to Ollama
+    elif configurable.llm_provider == "ollama":
         llm_json_mode = ChatOllama(
-            base_url=configurable.ollama_base_url, 
-            model=configurable.local_llm, 
-            temperature=0, 
-            format="json"
+            base_url=configurable.ollama_base_url,
+            model=configurable.local_llm,
+            temperature=0,
+            format="json",
         )
+    elif configurable.llm_provider == "openai":
+        llm_json_mode = ChatOpenAI(
+            model=configurable.openai_model,
+            temperature=0,
+            api_key=configurable.openai_api_key,
+        )
+    else:
+        raise ValueError(f"Unsupported LLM provider: {configurable.llm_provider}")
     
     result = llm_json_mode.invoke(
         [SystemMessage(content=reflection_instructions.format(research_topic=state.research_topic)),
