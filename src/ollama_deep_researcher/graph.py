@@ -1,4 +1,5 @@
 import json
+import os
 
 from typing_extensions import Literal
 
@@ -6,6 +7,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langgraph.graph import START, END, StateGraph
 
 from ollama_deep_researcher.configuration import Configuration, SearchAPI
@@ -58,8 +60,22 @@ def generate_query(state: SummaryState, config: RunnableConfig):
         llm_json_mode = ChatOpenAI(
             model=configurable.openai_model,
             temperature=0,
-            api_key=configurable.openai_api_key,
+            api_key=configurable.openai_api_key or os.getenv("OPENAI_API_KEY"),
         )
+    # elif configurable.llm_provider == "groq":
+    #     llm_json_mode = ChatOpenAI(
+    #         model=configurable.groq_model,
+    #         temperature=0,
+    #         api_key=configurable.groq_api_key or os.getenv("GROQ_API_KEY"),
+    #         base_url=configurable.groq_api_base_url,
+    #     )
+    elif configurable.llm_provider == "groq":
+        llm_json_mode = ChatGroq(
+            model_name=configurable.groq_model,
+            temperature=0,
+            groq_api_key=configurable.groq_api_key or os.getenv("GROQ_API_KEY"),
+            base_url=configurable.groq_api_base_url,
+        )        
     else:
         raise ValueError(f"Unsupported LLM provider: {configurable.llm_provider}")
     
@@ -174,7 +190,14 @@ def summarize_sources(state: SummaryState, config: RunnableConfig):
         llm = ChatOpenAI(
             model=configurable.openai_model,
             temperature=0,
-            api_key=configurable.openai_api_key,
+            api_key=configurable.openai_api_key or os.getenv("OPENAI_API_KEY"),
+        )
+    elif configurable.llm_provider == "groq":
+        llm = ChatOpenAI(
+            model=configurable.groq_model,
+            temperature=0,
+            api_key=configurable.groq_api_key or os.getenv("GROQ_API_KEY"),
+            base_url=configurable.groq_api_base_url,
         )
     else:
         raise ValueError(f"Unsupported LLM provider: {configurable.llm_provider}")
@@ -228,7 +251,14 @@ def reflect_on_summary(state: SummaryState, config: RunnableConfig):
         llm_json_mode = ChatOpenAI(
             model=configurable.openai_model,
             temperature=0,
-            api_key=configurable.openai_api_key,
+            api_key=configurable.openai_api_key or os.getenv("OPENAI_API_KEY"),
+        )
+    elif configurable.llm_provider == "groq":
+        llm_json_mode = ChatOpenAI(
+            model=configurable.groq_model,
+            temperature=0,
+            api_key=configurable.groq_api_key or os.getenv("GROQ_API_KEY"),
+            base_url=configurable.groq_api_base_url,
         )
     else:
         raise ValueError(f"Unsupported LLM provider: {configurable.llm_provider}")

@@ -24,10 +24,10 @@ class Configuration(BaseModel):
         title="LLM Model Name",
         description="Name of the LLM model to use"
     )
-    llm_provider: Literal["ollama", "lmstudio", "openai"] = Field(
+    llm_provider: Literal["ollama", "lmstudio", "openai", "groq"] = Field(
         default="ollama",
         title="LLM Provider",
-        description="Provider for the LLM (Ollama, LMStudio, or OpenAI)"
+        description="Provider for the LLM (Ollama, LMStudio, OpenAI, or Groq)"
     )
     search_api: Literal["perplexity", "tavily", "duckduckgo", "searxng"] = Field(
         default="duckduckgo",
@@ -63,6 +63,21 @@ class Configuration(BaseModel):
         default=None,
         title="OpenAI API Key",
         description="API key for OpenAI; will fallback to OPENAI_API_KEY env var if not provided"
+    )
+    groq_model: str = Field(
+        default="groq-bison",
+        title="Groq Model Name",
+        description="Name of the Groq model to use when LLM Provider is 'groq'"
+    )
+    groq_api_key: Optional[str] = Field(
+        default=None,
+        title="Groq API Key",
+        description="API key for Groq; will fallback to GROQ_API_KEY env var if not provided"
+    )
+    groq_api_base_url: str = Field(
+        default="https://api.groq.ai/v1",
+        title="Groq API Base URL",
+        description="Base URL for Groq API (OpenAI-compatible endpoint)"
     )
 
     @classmethod

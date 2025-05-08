@@ -1,7 +1,13 @@
-[Blog Post **here** →](https://jalcocert.github.io/JAlcocerT/understanding-langgraph-local-deep-researcher) 
+# Local Deep Researcher
+
+
+[Blog Post **here** →](https://jalcocert.github.io/JAlcocerT/understanding-langgraph-local-deep-researcher) with automatic docs
 
 
 1. Get [Ollama](https://github.com/JAlcocerT/Docker/tree/main/AI_Gen/Ollama) ready and pull a LLM
+
+Alternatively, use LMStudio or OpenAI, Groq LLMs via their APIs.
+
 2. Prepare [uv package manager](https://jalcocert.github.io/JAlcocerT/useful-python-stuff/#uv)
 3. Run LangGraph CLI
 
@@ -28,7 +34,6 @@ Understand the [execution flow](https://mermaid.live/edit#pako:eNqdVW1v4jgQ_iuWp
 
 ---
 
-# Local Deep Researcher
 
 Local Deep Researcher is a fully local web research assistant that uses any LLM hosted by [Ollama](https://ollama.com/search) or [LMStudio](https://lmstudio.ai/).
 
