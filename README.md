@@ -12,6 +12,7 @@ Alternatively, use LMStudio or OpenAI, Groq LLMs via their APIs.
 3. Run LangGraph CLI
 
 ```sh
+docker-compose -f ./Z_DeployMe/docker-compose.yml up -d
 # docker exec -it ollama sh
 # ollama pull deepseek-r1:8b
 
@@ -35,7 +36,7 @@ Understand the [execution flow](https://mermaid.live/edit#pako:eNqdVW1v4jgQ_iuWp
 ---
 
 
-Local Deep Researcher is a fully local web research assistant that uses any LLM hosted by [Ollama](https://ollama.com/search) or [LMStudio](https://lmstudio.ai/).
+Local Deep Researcher is a **fully local web research** assistant that uses any LLM hosted by [Ollama](https://ollama.com/search) or [LMStudio](https://lmstudio.ai/).
 
 Give it a topic and it will generate a web search query, gather web search results, summarize the results of web search, reflect on the summary to examine knowledge gaps, generate a new search query to address the gaps, and repeat for a user-defined number of cycles.
 

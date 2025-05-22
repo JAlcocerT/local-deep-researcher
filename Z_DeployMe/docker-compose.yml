@@ -1,0 +1,45 @@
+#version: '3'
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/version"]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+      start_period: 40s  # Give initial startup time before health checks begin
+
+  local-deep-researcher:
+    image: local-deep-researcher-image:latest
+    container_name: local-deep-researcher
+    ports:
+      - "2024:2024"
+    environment:
+      - LLM_PROVIDER=ollama
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - LOCAL_LLM=deepseek-r1:8b  # Change to your preferred model
+      - SEARCH_API=duckduckgo
+      - MAX_WEB_RESEARCH_LOOPS=3
+      - FETCH_FULL_PAGE=True
+      - PAGER=cat
+    command: tail -f /dev/null # Keep the container running      
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f http://localhost:2024 || curl -f http://localhost:2024/docs"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 5
+    #   start_period: 40s
+    restart: on-failure
+    # depends_on:
+    #   ollama:
+    #     condition: service_healthy
+
+volumes:
+  ollama_data:
