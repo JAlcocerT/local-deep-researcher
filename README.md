@@ -11,8 +11,11 @@ Alternatively, use LMStudio or OpenAI, Groq LLMs via their APIs.
 2. Prepare [uv package manager](https://jalcocert.github.io/JAlcocerT/useful-python-stuff/#uv)
 3. Run LangGraph CLI
 
+
+You can also run it manually with models via Ollama:
 ```sh
-docker-compose -f ./Z_DeployMe/docker-compose.yml up -d
+#docker-compose -f ./Z_DeployMe/docker-compose.yml up -d
+docker compose -f ./Z_DeployMe/docker-compose.yml up -d
 # docker exec -it ollama sh
 # ollama pull deepseek-r1:8b
 
@@ -23,6 +26,12 @@ uvx \
                  --with-editable . \
                  --python 3.11 \
                  langgraph dev
+```
+
+Use the DDG and alternatively, OpenAI models:
+ 
+```sh
+make run-prod
 ```
 
 Understand the [execution flow](https://mermaid.live/edit#pako:eNqdVW1v4jgQ_iuWpT21Ei0tb6V8OGnVAseJLm1CVek2q8ibDODbxMnZTtm22_9-YzsJ0ObutMcXzPiZmWcezwwvNMpioCO6SrJttGFSk-V1IAh-Pnw4-Y9PhSM-yEeQxNfoX-SkTaaS5Rsyz1jMxfrnwqni69p6B3TOxNpFuprPqugBdTg0fQ5oghAHj-GRHKHxOKBfSsRk-ru_-IQoD1hMaujpnyoTNWrqfbz97Xo8QZjhS1y0lczSURAIJaN2liQsZWEMkIcSFDAZbUC2Xaz8aZcPSZ6c_FrltecqukOAiAPxrkxX4kxwzVnCn5nmhl4Zc_FpMpsitygTK74upL01WQNxFMOKCyBX-1dEIbmU7VTwlx-XYwygNNNQOvpFmjL55BtTCzPnhW6RRaHxe-d46y1ubpc-uuYoRq5V6fxXAfKprWwI_gxtCasEIk00pHmCAdUuxP1yNjcBCs2Tyt3pR7ZYdA5StcgqkynTGs87x_nNzeLaPG-qdBHzrPS92jA9v_GtqYpw_O4l3SNY4ezRKmBPZUn2bLnZk0327oF-ov3vFTb_-DtEhX2BCY7S_-55r2wwcstzSMzz1oGrnrCDcITqzMRj9g3csKE8W643pGrQUGc5j1CbY9eHd4hfgwDsEgjtExpBqx7eE_HO4H8UCtQPcmcEe9sA1jncSo5PFnKhtCwiQ081x8BpaLDuaV7aM9t-eOXffW5ju7oqHFPa_lI9i2_R5MFDWlv4Wg9kczUPXhOTA6vtgwN7zeTB8wyV_TTmUCRaGUrkF-JPLdeskBGocM00LgaI9_liDItznXhv1KxHJywdm7kjuIn8oXlPx8OLvbKqi7ouzzesZSEEbufQ0TkQ2XOD4dmtWM53mIka2sjXc5P3lu-heY_v4YXX1Gplamyu5kYrQxBvcb8cvyBVLBH-qSVe6-oMGv3M4tRcFFB21JvbCRdmHbvbycz8j6xK078LgVjnY2W2Pk0iT5zIYxGbWS7_57D4BDRg4P0d7VazGeZ6TdEWXUse0xGqAi2aAi5R85O-GEhAsRNTCOgIjzGT38zueEWfnIk_siyt3FCw9YaOVixR-KvIY0x2zRnWtINgMpBXWSE0HQ16lzYGHb3Q73R00j0bnHYuemfnF91u93LY67XoE5o7F6ed80H_bDgc9Lv9Qa_Xf23RZ5v3_LTT7wy7w85ldzjonPf7g9e_ATyoqG4).
